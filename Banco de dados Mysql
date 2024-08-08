@@ -1,0 +1,42 @@
+-- Cria o banco de dados
+CREATE DATABASE IF NOT EXISTS SolarOrcamentos;
+
+-- Usa o banco de dados
+USE SolarOrcamentos;
+
+-- Cria a tabela para clientes
+CREATE TABLE IF NOT EXISTS Clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    telefone VARCHAR(20),
+    cpf VARCHAR(11) UNIQUE
+);
+
+-- Cria a tabela para lojas parceiras
+CREATE TABLE IF NOT EXISTS LojasParceiras (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cnpj VARCHAR(14) UNIQUE
+);
+
+-- Cria a tabela para produtos das lojas parceiras
+CREATE TABLE IF NOT EXISTS Produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    loja_parceira_id INT,
+    nome VARCHAR(255) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    descricao TEXT,
+    FOREIGN KEY (loja_parceira_id) REFERENCES LojasParceiras(id)
+);
+
+-- Cria a tabela para orçamentos
+CREATE TABLE IF NOT EXISTS Orcamentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT,
+    loja_parceira_id INT,
+    valor DECIMAL(10, 2) NOT NULL,
+    data DATE NOT NULL,
+    FOREIGN KEY (cliente_id) REFERENCES Clientes(id),
+    FOREIGN KEY (loja_parceira_id) REFERENCES LojasParceiras(id)
+);
