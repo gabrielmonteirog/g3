@@ -1,0 +1,21 @@
+Nosso projeto é um marketplace destinado a usuários e fornecedores de painéis solares. O objetivo é permitir que qualquer cliente acesse a plataforma e forneça suas especificações e requisitos desejados para um projeto. Essas informações são então apresentadas a fornecedores cadastrados, que respondem com propostas para avaliação dos clientes. Embora o projeto tenha um grande potencial, o resultado atual é um esqueleto com funcionalidades básicas, devido ao tempo limitado e à necessidade de aprendizado das ferramentas e da linguagem pelos desenvolvedores, que são novos em algumas dessas tecnologias.
+
+O diagrama UML foi criado antes do início do projeto, em colaboração com o grupo, para orientar todos os membros sobre a direção a seguir.
+
+Todas as classes foram desenvolvidas utilizando o BlueJ.
+
+Juntamente com o Eduardo, fiquei responsável pela parte do banco de dados SolarOrcamentos que foi feita em linguagem MySQL, onde foi projetado para permitir uma expansão futura, com uma estrutura clara que facilita a adição de novas funcionalidades.
+
+Foi projetado para gerenciar informações sobre os clientes, lojas parceiras e produtos em uma plataforma de orçamentos para painéis solares. Ele é composto por quatro tabelas principais:
+
+Clientes: Armazena informações sobre os clientes, incluindo nome, email, telefone e CPF. O email e o CPF são únicos para evitar duplicidades.
+
+LojasParceiras: Contém dados sobre lojas parceiras, como nome e CNPJ, que também é único. Onde tem uma correlação com outra tabela (Produtos).
+
+Produtos: Lista produtos disponíveis nas lojas parceiras, com detalhes como nome, preço e descrição. Cada produto está vinculado a uma loja específica através de uma chave estrangeira.
+
+Orcamentos: Registra os orçamentos realizados, associando cada um a um cliente e a uma loja parceira, com campos para valor total e data do orçamento.
+
+O banco de dados é estruturado para permitir fácil expansão e assegura a integridade referencial através do uso de chaves estrangeiras e restrições de unicidade.
+
+As restrições de unicidade nos campos de email, CPF e CNPJ garantem a integridade dos dados. O uso de chaves estrangeiras assegura a integridade referencial entre as tabelas. Com essa configuração, é possível gerenciar eficientemente as operações relacionadas aos orçamentos de painéis solares, garantindo um fluxo de dados consistente e confiável.
