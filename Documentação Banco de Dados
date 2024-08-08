@@ -1,0 +1,47 @@
+O banco de dados SolarOrcamentos é projetado para gerenciar informações de clientes, lojas parceiras e produtos relacionados a uma plataforma de orçamentos para painéis solares. Ele organiza dados em tabelas relacionadas, permitindo um armazenamento e acesso eficientes. Este relatório fornece uma visão detalhada de cada componente do banco de dados.
+
+Estrutura do Banco de Dados
+Banco de Dados: SolarOrcamentos
+
+O banco de dados SolarOrcamentos serve como contêiner para armazenar as tabelas que compõem o sistema. Ele é criado com o comando SQL CREATE DATABASE e usado através do comando USE.
+
+Tabela: Clientes
+
+Descrição: Armazena informações sobre os clientes que solicitam orçamentos.
+Campos:
+id (INT, AUTO_INCREMENT, PRIMARY KEY): Identificador único para cada cliente. A auto-incrementação garante que cada cliente tenha um ID único gerado automaticamente.
+nome (VARCHAR(255), NOT NULL): Nome completo do cliente. O tipo VARCHAR permite armazenar até 255 caracteres.
+email (VARCHAR(255), NOT NULL, UNIQUE): Endereço de email do cliente. É único, evitando duplicidade.
+telefone (VARCHAR(20)): Número de telefone do cliente. É armazenado como texto para permitir diversos formatos.
+cpf (VARCHAR(11), UNIQUE): CPF do cliente, armazenado sem formatação, garantindo unicidade.
+Tabela: LojasParceiras
+
+Descrição: Contém informações sobre as lojas parceiras que fornecem produtos e serviços.
+Campos:
+id (INT, AUTO_INCREMENT, PRIMARY KEY): Identificador único para cada loja parceira.
+nome (VARCHAR(255), NOT NULL): Nome da loja parceira.
+cnpj (VARCHAR(14), UNIQUE): CNPJ da loja, armazenado como uma string de 14 dígitos, garantindo que cada CNPJ seja único.
+Tabela: Produtos
+
+Descrição: Lista os produtos disponíveis em cada loja parceira.
+Campos:
+id (INT, AUTO_INCREMENT, PRIMARY KEY): Identificador único para cada produto.
+loja_parceira_id (INT, FOREIGN KEY): Referência à tabela LojasParceiras. Vincula cada produto a uma loja específica.
+nome (VARCHAR(255), NOT NULL): Nome do produto.
+preco (DECIMAL(10, 2), NOT NULL): Preço do produto, armazenado com precisão decimal para representar valores monetários.
+descricao (TEXT): Descrição detalhada do produto.
+Tabela: Orcamentos
+
+Descrição: Registra os orçamentos realizados pelos clientes.
+Campos:
+id (INT, AUTO_INCREMENT, PRIMARY KEY): Identificador único para cada orçamento.
+cliente_id (INT, FOREIGN KEY): Referência à tabela Clientes. Vincula cada orçamento a um cliente específico.
+loja_parceira_id (INT, FOREIGN KEY): Referência à tabela LojasParceiras. Indica a loja parceira associada ao orçamento.
+valor (DECIMAL(10, 2), NOT NULL): Valor total do orçamento.
+data (DATE, NOT NULL): Data em que o orçamento foi realizado.
+Relacionamentos
+Clientes e Orçamentos: A tabela Orcamentos possui uma chave estrangeira cliente_id que referencia a tabela Clientes, indicando qual cliente realizou o orçamento.
+LojasParceiras e Produtos: A tabela Produtos possui uma chave estrangeira loja_parceira_id que referencia a tabela LojasParceiras, associando produtos a lojas específicas.
+LojasParceiras e Orçamentos: A tabela Orcamentos também possui uma chave estrangeira loja_parceira_id, associando o orçamento a uma loja parceira específica.
+Considerações Finais
+O banco de dados SolarOrcamentos foi projetado para permitir a expansão futura, com estrutura clara para adicionar novas funcionalidades. As restrições de unicidade nos campos email, cpf e cnpj garantem a integridade dos dados. A utilização de chaves estrangeiras assegura a integridade referencial entre as tabelas. Com esta configuração, é possível gerenciar eficientemente as operações relacionadas aos orçamentos de painéis solares, garantindo um fluxo de dados consistente e confiável.
